@@ -6,6 +6,7 @@ import { usePaystackPayment } from "react-paystack";
 
 function CartsTotal({contactEmail=null}) {
     const {cartTotal, setCartTotal}= useContext(userContext); 
+    const {cart, setCart}= useContext(userContext);
     const [total, setTotal]= useState(JSON.parse(localStorage.getItem('Total')))
     const [emails, setEmails]=useState('')
     const navigate = new useNavigate();
@@ -53,10 +54,12 @@ function CartsTotal({contactEmail=null}) {
             // console.log('paystack result', response);
                 if(response.msg === 'saved'){
                     alert('payment successfull');
-                    localStorage.removeItem('productsInCart');
-                    localStorage.removeItem('Total');
                     setCartTotal(0);
                     setTotal(0);
+                    setCart(0);
+                    localStorage.removeItem('productsInCart');
+                    localStorage.removeItem('Total');
+                    
                 }
                 
             }

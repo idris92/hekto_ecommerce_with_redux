@@ -31,13 +31,14 @@ function GridFrame({id,name, price, sliced, picture, description,fav, color, siz
             }    
             if (names.includes(name) ){
                     // setCart(cartItems.length);
+                    alert("product exist in cart")
                     return "";
                     // console.log('True');
                 }else{
                     // console.log('false')
                     cartItems.push({'product_id':id,'product_picture':picture, 'product_name':name, 'product_color':color, 'product_size':size, 'product_price':sliced, 'inCart':1});
                     localStorage.setItem("productsInCart", JSON.stringify(cartItems));
-                    localStorage.setItem('Total', parseInt(cartTotal) + parseInt(price))
+                    localStorage.setItem('Total', parseInt(cartTotal) + parseInt(sliced))
                     setCart(cartItems.length);
                 }
         //   console.log(data);

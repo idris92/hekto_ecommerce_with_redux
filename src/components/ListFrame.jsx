@@ -38,7 +38,7 @@ function ListFrame({id,name, price, sliced, picture, description,fav, color, siz
                     
                     cartItems.push({'product_id':id,'product_picture':picture, 'product_name':name, 'product_color':color, 'product_size':size, 'product_price':sliced, 'inCart':1});
                     localStorage.setItem("productsInCart", JSON.stringify(cartItems));
-                    localStorage.setItem('Total', parseInt(cartTotal) + parseInt(price))
+                    localStorage.setItem('Total', parseInt(cartTotal) + parseInt(sliced))
                     setCart(cartItems.length);
                 }
         } else {
