@@ -1,15 +1,19 @@
-import React, { useEffect,  useState } from 'react'
+import React, { useEffect,  useState, useContext } from 'react'
 import Banner from '../components/Banner'
 import TopFilter from '../components/TopFilter'
 import GridFrame from '../components/GridFrame'
 import SideBar from '../components/SideBar'
+import { userContext } from '../context/UserContext';
 
 function ShopGrid() {
+const {brandId, setBrandId}= useContext(userContext);
+const {filterId, setFilterId}= useContext(userContext);
 const [products, setProducts]= useState([]);
     const Product=()=>{
         fetch("http://127.0.0.1:8000/api/products")
         .then(response => response.json())
         .then(result =>{
+           
             setProducts(result.products);
 
         } )
@@ -20,10 +24,44 @@ const [products, setProducts]= useState([]);
         });
       
     }
-   console.log(products);
+
+    const Brand = ()=>{
+        if (filterId.length !== 0){
+            // let filtered = [];
+            // for(let i = 0; i<products.length; i++){
+                // setProducts(products.filter(product=>product[i].Categories_id.includes(filterId)));
+                // console.log(products.filter(product=>product[i].Categories_id.includes(filterId)));
+            //     console.log(products[i].Categories_id)
+                
+            //    console.log(products);
+            // }
+            
+            // for (let i = 0; i <products.length; i++){
+            //     for (let j =0; j<brandId.length; j++){
+
+            //         console.log(products.filter(product=>product[i].Brand_id===(brandId[j])));
+            //     }
+            // }
+
+            var newArray = products.filter(function (el) {
+                return el.Categories_id === filterId
+                      
+              });
+              console.log(newArray);
+        }
+        // const cat = SideBar();
+        // console.log(filterId);
+    }
+//    console.log(products);
     useEffect(() => {
         Product()
     }, [])
+
+    useEffect(() => {
+        Brand()
+    }, [filterId])
+
+
     return (
         <div>
             <Banner content="Shop Grid Default" title="Shop List"/>
