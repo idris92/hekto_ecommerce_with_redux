@@ -5,13 +5,28 @@ function SideBar() {
   const {brandId, setBrandId}= useContext(userContext);
   const [category, setCategory] = useState([]);
   const [brand, setBrand] = useState([]);
+  const [categoryId, setCategoryId] = useState(0);
   const {filterId, setFilterId}=useContext(userContext);
+  
 
   const handleCategory =(e)=>{
-    // console.log('category', e.target.value);
-    setFilterId(e.target.value);
-    // return (e.target.value);
+    if (e.target.checked === true){
+      setFilterId(e.target.value);
+      setCategoryId(e.target.name);
+
+    }else{
+      setFilterId("");
+      setCategoryId(0);
+    }
+ 
   }
+
+  
+
+  // const checkToggle=(element)=>{
+  //  checked===0?setChecked(1):setChecked(0);
+   
+  // }
 
   const handleBrand = (e)=>{
     setBrandId([...brandId, e.target.value])
@@ -52,7 +67,7 @@ useEffect(()=>{
 }, [])
 
 // return filterId
-// console.log(category);
+// console.log(checked);
     return (
         <div className="col-lg-3">
 
@@ -60,10 +75,10 @@ useEffect(()=>{
                   <p>Categories</p>
                   <ul className="right-filter-ul">
                   {
-                      category.map((category)=>(
+                      category.map((category, index)=>(
 
                       <li className>
-                        <input className="form-check-input" value={category.category} onClick={handleCategory} type="checkbox" defaultValue id="flexCheckDefault" />
+                        <input key={index} className="form-check-input"  name={category.id} value={category.category} onChange={handleCategory} type="checkbox" defaultValue id="flexCheckDefault" />
                         <label className="form-check-label">{category.category}</label>
                       </li>
                       ))
@@ -76,10 +91,10 @@ useEffect(()=>{
                 <ul className="right-filter-ul">
                   
                   {
-                    brand.filter(brands=>brands.category_id.includes(filterId)).map(branded=>(
+                    brand.filter(brands=>brands.category_id.includes(categoryId)).map(branded=>(
                     // console.log('brand', brand)
                   <li className>
-                    <input className="form-check-input" value={branded.brand} onClick={handleBrand}type="checkbox" defaultValue id="flexCheckDefault" />
+                    <input className="form-check-input" value={branded.brand}  onClick={handleBrand} type="checkbox" defaultValue id="flexCheckDefault" />
                     <label className="form-check-label">{branded.brand}</label>
                   </li>
                     ))
