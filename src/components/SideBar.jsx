@@ -7,6 +7,7 @@ function SideBar() {
   const [brand, setBrand] = useState([]);
   const [categoryId, setCategoryId] = useState(0);
   const {filterId, setFilterId}=useContext(userContext);
+  const {filterName, setFilterName}= useContext(userContext);
   
 
   const handleCategory =(e)=>{
@@ -29,7 +30,13 @@ function SideBar() {
   // }
 
   const handleBrand = (e)=>{
-    setBrandId([...brandId, e.target.value])
+    if(e.target.checked === true){
+
+      setFilterName(e.target.value);
+    }else{
+      setFilterName("");
+    }
+    // setBrandId([...brandId, e.target.value])
   }
 
   const loadCategories = ()=>{

@@ -10,7 +10,7 @@ function Pagination({productCount, page,currentPage, onPageChange}) {
             {
                 pageCount === 1 ? '': pages.map((page)=>(
 
-                        <li class={page===currentPage?"page-item active":"page-item"}><a class="page-link"  onClick={()=>onPageChange(page)}>{page}</a></li>
+                        <li class={page===currentPage?"page-item active":"page-item"}><a class="page-link" style={{cursor:'pointer'}} onClick={()=>onPageChange(page)}>{page}</a></li>
                         
                         ))
                         // console.log("pages", productCount, page)

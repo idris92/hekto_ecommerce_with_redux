@@ -10,10 +10,13 @@ import {paginate} from '../utils/paginate';
 function ShopGrid() {
 const {brandId, setBrandId}= useContext(userContext);
 const {filterId, setFilterId}= useContext(userContext);
+const {filterName, setFilterName}= useContext(userContext);
 const [products, setProducts]= useState([]);
 const [allproducts, setAllProducts]=useState([]);
 const [currentPage, setCurrentPage]=useState(1);
 const {pageSize, setPageSize}= useContext(userContext);
+const [categories, setCategories]=useState([]);
+const {searchName, setSearchName}= useContext(userContext);
 
 
 // this is use to sent the product and page size to the paginate function
@@ -38,14 +41,51 @@ const movies = paginate(products,currentPage,pageSize );
         });
       
     }
-//This is uses to filter the categories of display items
-    const Brand = ()=>{
+
+const SearchFilter = ()=>{
+    if (searchName !== ""){
+        
+        var newArray = products.filter(function (el) {
+            // console.log(el.Name);
+            return el.Name.toLowerCase().includes(searchName.toLowerCase())
+                    
+        });
+        // console.log(newArray)
+            setProducts(newArray);
+    }else{
+        setProducts(allproducts);
+    }
+    // console.log(filterName);
+    
+}
+
+//filtering with serach name
+const handleBrand = ()=>{
+    if (filterName !== ""){
+        
+        var newArray = products.filter(function (el) {
+            // console.log(el.Name);
+            return el.Name.toLowerCase().includes(filterName.toLowerCase())
+                  
+        });
+        // console.log(newArray)
+          setProducts(newArray);
+    }else{
+        setProducts(categories);
+    }
+    // console.log(filterName);
+ 
+}
+
+//This is uses to filter name the categories of display items 
+    const handleCat = ()=>{
         if (filterId.length !== 0){
          
             var newArray = products.filter(function (el) {
                 return el.Categories_id === filterId
                       
               });
+              setCategories(newArray);
               setProducts(newArray);
         }else{
             setProducts(allproducts);
@@ -63,10 +103,17 @@ const movies = paginate(products,currentPage,pageSize );
 
 //The call teh brand function and this is dependent on the filterId
     useEffect(() => {
-        Brand()
+        handleCat()
     }, [filterId])
 
-
+// reload when brand filter name changes
+    useEffect(() => {
+        handleBrand()
+    }, [filterName])
+// reload when search filter name changes
+useEffect(() => {
+    SearchFilter()
+}, [searchName])
     return (
         <div>
             <Banner content="Shop Grid Default" title="Shop List"/>
