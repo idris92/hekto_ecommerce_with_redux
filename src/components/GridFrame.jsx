@@ -2,7 +2,8 @@ import React, {useContext, useState} from 'react'
 import { useNavigate } from 'react-router';
 import { userContext } from '../context/UserContext';
 
-function GridFrame({id,name, price, sliced, picture, description,fav, color, size, product}) {
+
+function GridFrame({id,name, price, sliced, picture, description,fav=null, color, size, product}) {
     const navigate = useNavigate();
     const{payload, setPayload}= useContext(userContext);
 

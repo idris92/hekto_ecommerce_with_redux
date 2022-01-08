@@ -24,13 +24,14 @@ function App() {
   const [glocalInCart, setglocalInCart]= useState(0);
   const [glocalPrice, setglocalPrice]= useState(0);
   const [cartTotal, setCartTotal]= useState(0);
+  const [pageSize, setPageSize]= useState(1);
   const [payload, setPayload]= useState({});
   const [brandId, setBrandId] = useState([]);
   const [filterId, setFilterId] = useState("");
   const [updatedFavourite, setUpdatedFavourite]= useState({});
   return (
     <div className="App">
-    <userContext.Provider value={{filterId, setFilterId,brandId, setBrandId, glocalPrice, setglocalPrice,glocalInCart, setglocalInCart,jwt, setJwt, userId, setUserId, payload, setPayload,updatedFavourite, setUpdatedFavourite, cart, setCart, cartTotal, setCartTotal, cartProduct, setCartProduct}}>
+    <userContext.Provider value={{pageSize, setPageSize,filterId, setFilterId,brandId, setBrandId, glocalPrice, setglocalPrice,glocalInCart, setglocalInCart,jwt, setJwt, userId, setUserId, payload, setPayload,updatedFavourite, setUpdatedFavourite, cart, setCart, cartTotal, setCartTotal, cartProduct, setCartProduct}}>
       
         <BrowserRouter>
         <Nav/>

@@ -3,6 +3,7 @@ import Banner from '../components/Banner'
 import TopFilter from '../components/TopFilter'
 import GridFrame from '../components/GridFrame'
 import SideBar from '../components/SideBar'
+import Pagination from '../components/Pagination'
 import { userContext } from '../context/UserContext';
 
 function ShopGrid() {
@@ -10,6 +11,8 @@ const {brandId, setBrandId}= useContext(userContext);
 const {filterId, setFilterId}= useContext(userContext);
 const [products, setProducts]= useState([]);
 const [allproducts, setAllProducts]=useState([]);
+const [currentPage, setCurrentPage]=useState(1);
+const {pageSize, setPageSize}= useContext(userContext);
     const Product=()=>{
         fetch("http://127.0.0.1:8000/api/products")
         .then(response => response.json())
@@ -40,7 +43,11 @@ const [allproducts, setAllProducts]=useState([]);
         }
      
     }
-//    console.log(products);
+
+    const handlePage=(page)=>{
+       setCurrentPage(page);
+    }
+//    console.log(products.length);
     useEffect(() => {
         Product()
     }, [])
@@ -61,14 +68,16 @@ const [allproducts, setAllProducts]=useState([]);
                         <div className='row'>
                         {
                             products.map((product)=>(
-                                <GridFrame key={product.id} product={product} color={product.Color} size={product.Size} id = {product.id} fav={product.favourites.favourite} name={product.Name} picture={product.Picture_url1} price={product.Price} sliced={Math.ceil(product.Price-(product.SlicedPercentage/100 * product.Price))} />
+                                <GridFrame key={product.id} product={product} color={product.Color} size={product.Size} id = {product.id} fav={product.favourites?product.favourites.favourite:'' } name={product.Name} picture={product.Picture_url1} price={product.Price} sliced={Math.ceil(product.Price-(product.SlicedPercentage/100 * product.Price))} />
                             ))
                         }
                      
                         </div>
+                        <Pagination productCount={products.length} page={pageSize} currentPage={currentPage} onPageChange={handlePage}/>
                     </div>
                 </div>
             </div>
+            
         </div>
     )
 }
