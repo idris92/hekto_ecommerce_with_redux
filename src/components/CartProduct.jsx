@@ -77,8 +77,9 @@ function CartProduct({idx,product, name, picture, color, size, amount, inCart}) 
     const removeItem=()=>{
         let item = JSON.parse(localStorage.getItem('productsInCart'));
         let itemTotal = JSON.parse(localStorage.getItem('Total'));
-        item.splice(idx, idx+1);
-        // item[idx].pop();
+        item.splice(idx, 1);
+        // console.log("splice item", item);
+        // console.log("idx", idx);
         localStorage.setItem("productsInCart", JSON.stringify(item));
         localStorage.setItem('Total',parseInt(itemTotal) - parseInt(productPrice));
         setCartTotal(parseInt(itemTotal) - parseInt(amount));

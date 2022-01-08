@@ -4,6 +4,8 @@ import TopFilter from '../components/TopFilter'
 import SideBar from '../components/SideBar'
 import ListFrame from '../components/ListFrame'
 import { userContext } from '../context/UserContext';
+import {paginate} from '../utils/paginate';
+import Pagination from '../components/Pagination'
 
 function ShopLeft() {
   const [products, setProducts]= useState([]);
@@ -11,6 +13,14 @@ function ShopLeft() {
   const {updatedFavourite, setUpdatedFavourite}=useContext(userContext);
   const {filterId, setFilterId}= useContext(userContext);
   const [allproducts, setAllProducts]=useState([]);
+  const [currentPage, setCurrentPage]=useState(1);
+  const {pageSize, setPageSize}= useContext(userContext);
+
+
+  // this is use to sent the product and page size to the paginate function
+
+  const movies = paginate(products,currentPage,pageSize );
+
 
     const Product=()=>{
         fetch("http://127.0.0.1:8000/api/products")
@@ -41,6 +51,10 @@ function ShopLeft() {
    
   }
 
+  //this set the current page of the products in the navigation 
+  const handlePage=(page)=>{
+    setCurrentPage(page);
+ }
   
     useEffect(() => {
         Product()
@@ -65,6 +79,7 @@ function ShopLeft() {
             }
             {/* <ListFrame/> */}
             </div>
+            <Pagination productCount={products.length} page={pageSize} currentPage={currentPage} onPageChange={handlePage}/>
           </div>
         </div>
       </div>
