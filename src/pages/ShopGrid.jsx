@@ -5,6 +5,7 @@ import GridFrame from '../components/GridFrame'
 import SideBar from '../components/SideBar'
 import Pagination from '../components/Pagination'
 import { userContext } from '../context/UserContext';
+import {paginate} from '../utils/paginate';
 
 function ShopGrid() {
 const {brandId, setBrandId}= useContext(userContext);
@@ -13,6 +14,14 @@ const [products, setProducts]= useState([]);
 const [allproducts, setAllProducts]=useState([]);
 const [currentPage, setCurrentPage]=useState(1);
 const {pageSize, setPageSize}= useContext(userContext);
+
+
+// this is use to sent the product and page size to the paginate function
+
+const movies = paginate(products,currentPage,pageSize );
+
+// this is a function that load up all the product from the database onload with the useEffect help
+
     const Product=()=>{
         fetch("http://127.0.0.1:8000/api/products")
         .then(response => response.json())
@@ -29,7 +38,7 @@ const {pageSize, setPageSize}= useContext(userContext);
         });
       
     }
-
+//This is uses to filter the categories of display items
     const Brand = ()=>{
         if (filterId.length !== 0){
          
@@ -43,15 +52,16 @@ const {pageSize, setPageSize}= useContext(userContext);
         }
      
     }
-
+//this set the current page of the products in the navigation 
     const handlePage=(page)=>{
        setCurrentPage(page);
     }
-//    console.log(products.length);
+//   This run while the page is loading and call a function that collect all products
     useEffect(() => {
         Product()
     }, [])
 
+//The call teh brand function and this is dependent on the filterId
     useEffect(() => {
         Brand()
     }, [filterId])
@@ -67,7 +77,7 @@ const {pageSize, setPageSize}= useContext(userContext);
                     <div className='col-lg-9'>
                         <div className='row'>
                         {
-                            products.map((product)=>(
+                            movies.map((product)=>(
                                 <GridFrame key={product.id} product={product} color={product.Color} size={product.Size} id = {product.id} fav={product.favourites?product.favourites.favourite:'' } name={product.Name} picture={product.Picture_url1} price={product.Price} sliced={Math.ceil(product.Price-(product.SlicedPercentage/100 * product.Price))} />
                             ))
                         }
