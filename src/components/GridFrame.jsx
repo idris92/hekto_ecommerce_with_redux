@@ -32,7 +32,7 @@ function GridFrame({ id, name, price, sliced, picture, description, fav = null, 
 		} else {
 			var myHeaders = new Headers();
 			myHeaders.append('Content-Type', 'application/json');
-			myHeaders.append('Authorization', 'Bearer' + JSON.parse(localStorage.getItem('jwt')));
+			// myHeaders.append('Authorization', 'Bearer' + JSON.parse(localStorage.getItem('jwt')));
 
 			var requestOptions = {
 				method: 'POST',

@@ -6,6 +6,7 @@ import SideBar from '../components/SideBar'
 import Pagination from '../components/Pagination'
 import { userContext } from '../context/UserContext';
 import {paginate} from '../utils/paginate';
+import { getRequest } from '../functions/GetRequests'
 
 function ShopGrid() {
 const {brandId, setBrandId}= useContext(userContext);
@@ -36,7 +37,7 @@ const movies = paginate(products,currentPage,pageSize );
         } )
         .catch(error =>{
             alert("Something went wrong! Please check your internet connection....");
-             console.log('error', error)
+        
         
         });
       

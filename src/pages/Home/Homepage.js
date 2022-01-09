@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import CardTrending from '../../components/CardTrending'
 import FeaturedCard from '../../components/FeaturedCard'
 import LateCard from '../../components/LateCard'
@@ -9,6 +9,24 @@ import TopCard from '../../components/TopCard'
 import './Homepage.css'
 
 export default function Homepage() {
+    const [featured, setFeatured] = useState([]);
+    const loadFeatured=()=>{
+        fetch(`http://127.0.0.1:8000/api/featured`)
+				.then(response => response.json())
+				.then(result =>{
+					if(result){
+                        setFeatured(result.featured)
+						// setContacts(result.contact);
+						// setCartTotal(JSON.parse(localStorage.getItem('Total')))
+					
+					}
+					
+				}
+			 )
+    }
+    useEffect(() => {
+      loadFeatured()
+    }, [])
 
     return (
         <div>
@@ -52,23 +70,12 @@ export default function Homepage() {
             <h2 className="featured">featured Products</h2>
 
             <div className="row">
+                {
+                    featured.slice(0,5).map((feature)=>(
 
-            <FeaturedCard
-            title = "obinna"
-            
-            />
-            <FeaturedCard
-            title = "collins"
-            
-            />
-            <FeaturedCard
-            title = "ireti"
-            
-            />
-            <FeaturedCard
-            title = "paul"
-            
-            />
+                        <FeaturedCard color={feature.Color} size={feature.Size} price={feature.Price} key={feature.id} id ={feature.id} picture = {feature.Picture_url1} name={feature.Name} sliced={feature.Price-((feature.SlicedPercentage/100) *feature.Price)}/>
+                    ))
+                }
 
             
             </div>
