@@ -26,8 +26,8 @@ export default function FeaturedCard({picture, name, sliced, id,color, size, pri
                     <i className="far fa-heart item-action" />
                     <i className="fas fa-search-plus item-action" />
                 </div>
-                    <div style={{width:"270px", height:"236px", overflow:'hidden'}}>
-                    <img src={`http://127.0.0.1:8000/images/${picture}`} alt="" className="card-img-top" />
+                    <div style={{maxWidth:"270px", height:"236px", overflow:'hidden'}}>
+                        <img src={`http://127.0.0.1:8000/images/${picture}`} alt="" className="card-img-top" style={{maxWidth:"270px"}} />
                     </div>
                     <div id='btn'>
                     

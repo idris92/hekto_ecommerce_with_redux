@@ -1,14 +1,15 @@
 import React from 'react'
 
-export default function CardTrending(prop) {
+export default function CardTrending({picture, sliced, price}) {
     return (
         <div className="col-lg-3">
         <div className="card trending-card">
        
            <div className="card-body">
            <div className="image-latest">
-
-           <img src={prop.img} alt="" className="card-img-top " />
+            <div style={{maxWidth:"244px", height:'247px', overflow:'hidden'}}>
+           <img src={`http://127.0.0.1:8000/images/${picture}`} alt="" className="card-img-top " />
+           </div>
          
         </div>
         <div className="card-latest">
@@ -18,8 +19,8 @@ export default function CardTrending(prop) {
                <p id='text-trend'>Comfort Handy Craft</p>
                </div>
                <div className="col-lg-12 trend-price">
-               <span id='after-trend'>$37</span>
-               <span id='before-trend'>$120</span>
+               <span id='after-trend'>${sliced}</span>
+               <span id='before-trend'>${price}</span>
                </div>
 
                <div className="col-lg-6">

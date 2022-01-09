@@ -26,7 +26,7 @@ function App() {
   const [glocalInCart, setglocalInCart]= useState(0);
   const [glocalPrice, setglocalPrice]= useState(0);
   const [cartTotal, setCartTotal]= useState(0);
-  const [pageSize, setPageSize]= useState(1);
+  const [pageSize, setPageSize]= useState(3);
   const [payload, setPayload]= useState({});
   const [filterName, setFilterName]= useState('');
   const [brandId, setBrandId] = useState([]);
