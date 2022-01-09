@@ -2,6 +2,7 @@ import React,{useContext, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {useNavigate} from 'react-router'
 import { userContext } from '../context/UserContext';
+import { toast } from 'react-toastify';
 
 function Nav() {
   const navigate = new useNavigate();
@@ -11,6 +12,7 @@ function Nav() {
     // localStorage.removeItem('jwt');
     localStorage.removeItem('jwt');
     localStorage.removeItem('user_id');
+    toast("logged out");
     navigate('/login');
   }
   

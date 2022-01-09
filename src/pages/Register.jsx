@@ -4,6 +4,7 @@ import InputBox from '../components/InputBox'
 import Button from '../components/Button'
 import { useNavigate } from 'react-router'
 import {Link} from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 
 function Register() {
@@ -36,6 +37,7 @@ function Register() {
             if(result){
                 localStorage.setItem("jwt", JSON.stringify(result.token));
                 // console.log('register_result',result);
+                toast("Registration Successfull");
                 navigate('/left');
             }
             

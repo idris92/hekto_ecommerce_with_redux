@@ -8,6 +8,7 @@ import InputBox from '../components/InputBox';
 import { useNavigate } from 'react-router';
 import {Link} from 'react-router-dom';
 import { userContext } from '../context/UserContext';
+import { toast } from 'react-toastify';
 
 function ShoppingCart() {
 	const navigate = new useNavigate();
@@ -17,10 +18,10 @@ function ShoppingCart() {
 	const {cartTotal, setCartTotal}= useContext(userContext); 
 	const {cartProduct, setCartProduct} = useContext(userContext);
 	const [products, setProducts]= useState(JSON.parse(localStorage.getItem('productsInCart')));
-	// const [cartItems, setCartItems]= useState([])
-	// const [keys, setKeys]=useState([]);
+	const {cart, setCart}= useContext(userContext);
+
 	let cartItems = JSON.parse(localStorage.getItem('productsInCart'));
-	// const [cartTotals, setCartTotals]= useState(JSON.parse(localStorage.getItem('Total')));
+
 	useEffect(() => {
 			let user_id = JSON.parse(localStorage.getItem('user_id'));
 			if (user_id){
@@ -36,7 +37,8 @@ function ShoppingCart() {
 				}
 			 )
 			}else{
-				alert('You are not logged in');
+				toast('You are not logged in')
+				// alert('You are not logged in');
 				navigate('/login');
 			}
 		
@@ -45,6 +47,13 @@ function ShoppingCart() {
 
 	const handleShopping=()=>{
 		navigate('/grid')
+	}
+
+	const handleClear=()=>{
+		localStorage.removeItem('productsInCart')
+		localStorage.removeItem('Total')
+		setCartTotal(0);
+		setCart(0);
 	}
 	
 	console.log(contacts);
@@ -110,6 +119,7 @@ function ShoppingCart() {
 								font="Josefin Sans"
 								padding="8px 24px"
 								name="Clear Cart"
+								click={handleClear}
 							/>
 						</div>
 					</div>

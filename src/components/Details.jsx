@@ -1,4 +1,5 @@
 import React, {useState,useEffect, useContext} from 'react'
+import { toast } from 'react-toastify';
 import { userContext } from '../context/UserContext';
 import Button from './Button';
 
@@ -52,12 +53,14 @@ function Details({sliced,picture1, picture2, picture3, picture4, product_name, c
             if (names.includes(product_name) ){
                     // setCart(cartItems.length);
                     return "";
+					toast("product already in cart")
                     // console.log('True');
                 }else{
                     // console.log('false')
                     cartItems.push({'product_picture':picture1, 'product_name':product_name, 'product_color':color, 'product_size':size, 'product_price':sliced, 'inCart':1});
                     localStorage.setItem("productsInCart", JSON.stringify(cartItems));
-                    localStorage.setItem('Total', parseInt(cartTotal) + parseInt(sliced))
+                    localStorage.setItem('Total', parseInt(cartTotal) + parseInt(sliced));
+					toast("product added to cart");
                     setCart(cartItems.length);
                 }
         //   console.log(data);
@@ -66,6 +69,7 @@ function Details({sliced,picture1, picture2, picture3, picture4, product_name, c
         cartItems=[{'product_picture':picture1, 'product_name':product_name, 'product_color':color, 'product_size':size, 'product_price':sliced, 'inCart':1}]
         localStorage.setItem('Total', sliced)
         localStorage.setItem("productsInCart", JSON.stringify(cartItems));
+		toast("product added to cart");
         setCart(cartItems.length);
         }
 	}

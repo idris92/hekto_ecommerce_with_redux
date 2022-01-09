@@ -14,8 +14,10 @@ import Contact from './pages/Contact';
 import {userContext} from './context/UserContext';
 import Homepage from './pages/Home/Homepage'
 import './App.css';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
-
+toast.configure()
 function App() {
   const [jwt, setJwt]= useState('');
   const [userId, setUserId]= useState('');

@@ -2,8 +2,13 @@ import React from 'react'
 import Banner from '../components/Banner'
 import TopFilter from '../components/TopFilter'
 import Button from '../components/Button'
+import { useNavigate } from 'react-router'
 
 function OrderCompleted() {
+    const navigate = useNavigate();
+    const ContinueShopping=()=>{
+        navigate('/grid')
+    }
     return (
         <div>
             <Banner content="Order Completed" title="Order Completed" />
@@ -30,6 +35,7 @@ function OrderCompleted() {
                         font="Lato"
                         padding="12px 24px"
                         name="Continue Shopping"
+                        click={ContinueShopping}
                                         />
                 </div>
                 

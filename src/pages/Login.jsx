@@ -5,6 +5,7 @@ import Button from '../components/Button'
 import { useNavigate} from 'react-router'
 import {Link} from 'react-router-dom'
 import {userContext} from '../context/UserContext'
+import { toast } from 'react-toastify'
 
 function Login() {
     const {jwt, setJwt}= useContext(userContext);
@@ -41,6 +42,7 @@ function Login() {
                     localStorage.setItem("jwt", JSON.stringify(result.token));
                     localStorage.setItem("user_id", result.user.id);
                     navigate('/left');
+                    toast("successfully logged in");
                 }
                 
             }

@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { userContext } from '../context/UserContext';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import { funcCart } from '../functions/AddToCart';
 
 function ListFrame({id,name, price, sliced, picture, description,fav, color, size}) {
 	const navigate = useNavigate();
@@ -20,35 +22,10 @@ function ListFrame({id,name, price, sliced, picture, description,fav, color, siz
         navigate(`/details/${id}`)
     }
 
-	const handleCart = ()=>{
-		let cartItems = JSON.parse(localStorage.getItem("productsInCart"));
-        let cartTotal = JSON.parse(localStorage.getItem("Total"));
-
-        if (cartItems !== null) {
-            let data = {'product_id':id,'product_picture':picture, 'product_name':name, 'product_color':color, 'product_size':size, 'product_price':price, 'inCart':1}
-            let names = []
-            for (let i = 0; i < cartItems.length; i++){
-                names.push(cartItems[i].product_name)
-            }    
-            if (names.includes(name) ){
-                
-                    return "";
-                
-                }else{
-                    
-                    cartItems.push({'product_id':id,'product_picture':picture, 'product_name':name, 'product_color':color, 'product_size':size, 'product_price':sliced, 'inCart':1});
-                    localStorage.setItem("productsInCart", JSON.stringify(cartItems));
-                    localStorage.setItem('Total', parseInt(cartTotal) + parseInt(sliced))
-                    setCart(cartItems.length);
-                }
-        } else {
-
-        cartItems=[{'product_id':id,'product_picture':picture, 'product_name':name, 'product_color':color, 'product_size':size, 'product_price':sliced, 'inCart':1}]
-        localStorage.setItem('Total', sliced)
-        localStorage.setItem("productsInCart", JSON.stringify(cartItems));
-        setCart(cartItems.length);
-        }
-    }
+	const handleCart = () => {
+		let output = funcCart(id, picture, name, color, size, price, sliced);
+        setCart(output);
+	};
 
 
 

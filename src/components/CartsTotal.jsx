@@ -3,6 +3,7 @@ import Button from './Button'
 import { userContext } from '../context/UserContext';
 import { useNavigate } from 'react-router';
 import { usePaystackPayment } from "react-paystack";
+import { toast } from 'react-toastify';
 
 function CartsTotal({contactEmail=null}) {
     const {cartTotal, setCartTotal}= useContext(userContext); 
@@ -53,12 +54,13 @@ function CartsTotal({contactEmail=null}) {
         .then(response =>{
             // console.log('paystack result', response);
                 if(response.msg === 'saved'){
-                    alert('payment successfull');
+                    toast.success('payment successfull');
                     setCartTotal(0);
                     setTotal(0);
                     setCart(0);
                     localStorage.removeItem('productsInCart');
                     localStorage.removeItem('Total');
+                    navigate('/complete')
                     
                 }
                 
