@@ -238,7 +238,7 @@ export default function Homepage() {
                     {
                         trending.map((trend)=>(
 
-                            <CardTrending picture={trend.Picture_url1} price={trend.Price} sliced={Math.ceil(trend.Price - ((trend.SlicedPercentage/100)* trend.Price))}/>
+                            <CardTrending id={trend.id} picture={trend.Picture_url1} price={trend.Price} sliced={Math.ceil(trend.Price - ((trend.SlicedPercentage/100)* trend.Price))}/>
                         ))
                     }
 					

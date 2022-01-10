@@ -1,6 +1,7 @@
 import React, {useState,useEffect, useContext} from 'react'
 import InputBox from '../components/InputBox'
 import Button from '../components/Button'
+import { toast } from 'react-toastify';
 
 
 function ContactForm() {
@@ -43,7 +44,8 @@ function ContactForm() {
         .then(response => response.json())
         .then(result =>{
                 if(result){
-                    alert('contact updated saved.')
+                    toast('contact updated saved.')
+                    // alert('contact updated saved.')
                 }
                 
             }
@@ -71,7 +73,8 @@ function ContactForm() {
         .then(result =>{
                 if(result){
                     setContacts({...contacts, [e.target.id]: ''})
-                    alert('contact succesfully saved.')
+                    toast('contact succesfully saved.');
+                    // alert('contact succesfully saved.')
                     console.log(result)
                 }
                 

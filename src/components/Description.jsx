@@ -37,9 +37,9 @@ function Description({description, info, video, review}) {
             setDisplay(video)
         }
     }
-//   useEffect(() => {
-//       setDisplay(description)
-//   }, [])
+  useEffect(() => {
+     AddDesc()
+  }, [])
     return (
         <div className="row"  style={{marginTop:"131px"}}>
             <span className="col-lg-2" style={{ fontFamily:'Josefin Sans', fontSize:'24px'}}><a onClick={AddDesc} style={{textDecoration:'none', color:'#151875', cursor:'pointer'}}>Description</a></span>

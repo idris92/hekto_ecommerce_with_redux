@@ -12,9 +12,9 @@ function CartsTotal({contactEmail=null}) {
     const [emails, setEmails]=useState('')
     const navigate = new useNavigate();
    
-    
+    let references = (new Date()).getTime().toString()
     const [config, setConfig] = useState({
-        reference: (new Date()).getTime().toString(),
+        reference:references,
 		email: contactEmail,
 		amount:(total+50) * 100,
 		publicKey: "pk_test_0cf400c602268d06bbba26454b61c1a4f858f698",
@@ -23,20 +23,12 @@ function CartsTotal({contactEmail=null}) {
     const initializePayment= usePaystackPayment (config);
 
     const onSuccess =(reference)=>{
-        let all_product= JSON.parse(localStorage.getItem('productsInCart'))
-        let user = JSON.parse(localStorage.getItem('user_id'))
-        for(let i =0; i<all_product.length; i++){
-            all_product[i]['status'] = reference.status;
-            all_product[i]['ref_id'] = reference.reference;
-            all_product[i]['transaction_id']= reference.trans;
-            all_product[i]['user_id'] = user;
-            all_product[i]['quantity'] = all_product[i]['inCart'];
-            delete all_product[i]['inCart'];
-            delete all_product[i]['product_picture'];
-        }
+       
         
         let payload = {
-            "products" :all_product,
+            "status" :"success",
+           "ref_id":references,
+           "transaction_id":reference.trans
         }
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -49,11 +41,11 @@ function CartsTotal({contactEmail=null}) {
         redirect: 'follow'
         };
 
-        fetch("http://127.0.0.1:8000/api/payment", requestOptions)
+        fetch("http://127.0.0.1:8000/api/paymentup", requestOptions)
         .then(response => response.json())
         .then(response =>{
-            // console.log('paystack result', response);
-                if(response.msg === 'saved'){
+            console.log('paystack result', response);
+                if(response.response){
                     toast.success('payment successfull');
                     setCartTotal(0);
                     setTotal(0);
@@ -90,7 +82,51 @@ function CartsTotal({contactEmail=null}) {
     }
    
     const handleProceed=()=>{
-        payWithPaystack()
+        let all_product= JSON.parse(localStorage.getItem('productsInCart'))
+        let user = JSON.parse(localStorage.getItem('user_id'))
+
+        // console.log(reference);
+        for(let i =0; i<all_product.length; i++){
+            all_product[i]['status'] = 'pending';
+            all_product[i]['ref_id'] = references;
+            // all_product[i]['transaction_id']= reference.trans;
+            all_product[i]['user_id'] = user;
+            all_product[i]['quantity'] = all_product[i]['inCart'];
+            delete all_product[i]['inCart'];
+            delete all_product[i]['product_picture'];
+        }
+        
+        let payload = {
+            "products" :all_product,
+        }
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        // myHeaders.append("Authorization","Bearer" + JSON.parse(localStorage.getItem('jwt')));
+
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(payload),
+        redirect: 'follow'
+        };
+
+        fetch("http://127.0.0.1:8000/api/payment", requestOptions)
+        .then(response => response.json())
+        .then(response =>{
+            // console.log('paystack result', response);
+                if(response.msg === 'saved'){
+                    payWithPaystack()
+                    
+                }
+                
+            }
+         )
+        .catch(error =>{
+            alert("Something went wrong! Please check your internet connection....");
+             console.log('error', error)
+        
+        });
+        
     
     }
 

@@ -92,28 +92,28 @@ function ShopLeft() {
           }
        
       }
-  //this set the current page of the products in the navigation 
-      const handlePage=(page)=>{
-         setCurrentPage(page);
-      }
-  //   This run while the page is loading and call a function that collect all products
-      useEffect(() => {
-          Product()
-      }, [])
-  
-  //The call teh brand function and this is dependent on the filterId
-      useEffect(() => {
-          handleCat()
-      }, [filterId])
-  
-  // reload when brand filter name changes
-      useEffect(() => {
-          handleBrand()
-      }, [filterName])
-  // reload when search filter name changes
-  useEffect(() => {
-      SearchFilter()
-  }, [searchName])
+ //this set the current page of the products in the navigation 
+ const handlePage=(page)=>{
+    setCurrentPage(page);
+ }
+//   This run while the page is loading and call a function that collect all products
+ useEffect(() => {
+     Product()
+ }, [])
+
+//The call teh brand function and this is dependent on the filterId
+ useEffect(() => {
+     handleCat()
+ }, [filterId])
+
+// reload when brand filter name changes
+ useEffect(() => {
+     handleBrand()
+ }, [filterName])
+// reload when search filter name changes
+useEffect(() => {
+ SearchFilter()
+}, [searchName])
     return (
         <div>
             <Banner content="Shop Left Sidebar" title="Shop Left Sidebar" />
@@ -124,13 +124,13 @@ function ShopLeft() {
             <SideBar/>
             <div className="col-lg-9">
             {
-              products.map((product)=>(
+              movies.map((product)=>(
                 <ListFrame key={product.id}  id = {product.id} fav={product.favourites?product.favourites.favourite:'' } name={product.Name} picture={product.Picture_url1} description ={product.Description} price={product.Price} sliced={Math.ceil(product.Price-(product.SlicedPercentage/100 * product.Price))}/>
               ))
             }
             {/* <ListFrame/> */}
-            </div>
             <Pagination productCount={products.length} page={pageSize} currentPage={currentPage} onPageChange={handlePage}/>
+            </div>
           </div>
         </div>
       </div>

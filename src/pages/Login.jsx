@@ -36,14 +36,15 @@ function Login() {
         .then(response => response.json())
         .then(result =>{
             // console.log('id', result.user.id);
-                if(result){
+                if(result.msg ="login"){
                     setJwt(result.jwt)
                     setUserId( result.user.id)
                     localStorage.setItem("jwt", JSON.stringify(result.token));
                     localStorage.setItem("user_id", result.user.id);
-                    navigate('/left');
+                    navigate('/');
                     toast("successfully logged in");
                 }
+                
                 
             }
          )
