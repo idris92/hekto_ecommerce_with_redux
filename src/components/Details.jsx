@@ -81,8 +81,8 @@ function Details({sliced,picture1, picture2, picture3, picture4, product_name, c
 					style={{ boxShadow: '0px 0px 25px 10px #F6F4FD', borderRadius: '2px', backgroundColor: '#fff' }}
 				>
 					<div className="col-lg-2">
-						<img src={ `http://127.0.0.1:8000/images/${picture12 }` } onClick={handlePicture1} style={{ padding: '8px 8px 4px', width:'151px', height:'155px' }} alt={product_name} />
-						<img src={`http://127.0.0.1:8000/images/${picture13 }`} onClick={handlePicture2} style={{ padding: '4px 8px', width:'151px', height:'155px' }} alt={product_name} />
+						<img src={ `http://127.0.0.1:8000/images/${picture12}`} onClick={handlePicture1} style={{ padding: '8px 8px 4px', width:'151px', height:'155px' }} alt={product_name} />
+						<img src={`http://127.0.0.1:8000/images/${picture13}`} onClick={handlePicture2} style={{ padding: '4px 8px', width:'151px', height:'155px' }} alt={product_name} />
 						<img src={`http://127.0.0.1:8000/images/${picture14}`} onClick={handlePicture3} style={{ padding: '4px 8px', width:'151px', height:'155px' }} alt={product_name} />
 					</div>
 					<div className="col-lg-4" style={{maxWidth:'375px', maxHeight:'487px', overflow:'hidden' }}>

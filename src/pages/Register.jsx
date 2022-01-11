@@ -20,7 +20,7 @@ function Register() {
     // console.log(payload.email, payload.password);
     const handleSubmit = () =>{
         var myHeaders = new Headers();
-        console.log(myHeaders);
+        // console.log(myHeaders);
         myHeaders.append("Content-Type", "application/json");
         // myHeaders.append("Authorization","Bearer" + JSON.parse(localStorage.getItem('jwt')));
 
