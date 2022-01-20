@@ -1,3 +1,4 @@
+import { filter } from 'lodash';
 import React, {useState, useEffect, useContext} from 'react'
 import { userContext } from '../context/UserContext';
 
@@ -8,6 +9,7 @@ function SideBar() {
   const [categoryId, setCategoryId] = useState(0);
   const {filterId, setFilterId}=useContext(userContext);
   const {filterName, setFilterName}= useContext(userContext);
+  const {filterPrice, setFilterPrice}= useContext(userContext);
   
 
   const handleCategory =(e)=>{
@@ -22,7 +24,15 @@ function SideBar() {
  
   }
 
-  
+  const handlePrice=(e)=>{
+    if (e.target.checked === true){
+    // console.log(filterPrice);
+      setFilterPrice(filterPrice.lowerbound);
+      setFilterPrice(filterPrice.lowerbound);
+    }else{
+      console.log('unchecked');
+    }
+  }
 
   // const checkToggle=(element)=>{
   //  checked===0?setChecked(1):setChecked(0);
@@ -113,19 +123,19 @@ useEffect(()=>{
                 <p>Price Filter</p>
                 <ul className="right-filter-ul">
                   <li className>
-                    <input className="form-check-input" type="checkbox" defaultValue id="flexCheckDefault" />
+                    <input className="form-check-input" upper={0} lower={150} type="checkbox" onClick={handlePrice} defaultValue id="flexCheckDefault" />
                     <label className="form-check-label">$0.00 - $150.00</label>
                   </li>
                   <li className>
-                    <input className="form-check-input" type="checkbox" defaultValue id="flexCheckDefault" />
+                    <input className="form-check-input" upper={150} lower={350} type="checkbox" onClick={handlePrice} defaultValue id="flexCheckDefault" />
                     <label className="form-check-label">$150.00 - $350.00</label>
                   </li>
                   <li className>
-                    <input className="form-check-input" type="checkbox" defaultValue id="flexCheckDefault" />
+                    <input className="form-check-input" upper={150} lower={504} type="checkbox" onClick={handlePrice} defaultValue id="flexCheckDefault" />
                     <label className="form-check-label">$150.00 - $504.00</label>
                   </li>
                   <li className>
-                    <input className="form-check-input" type="checkbox" defaultValue id="flexCheckDefault" />
+                    <input className="form-check-input" upper={450} type="checkbox" onClick={handlePrice} defaultValue id="flexCheckDefault" />
                     <label className="form-check-label">$450.00 +</label>
                   </li>
                 </ul>

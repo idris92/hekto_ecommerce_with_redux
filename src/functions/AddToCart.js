@@ -14,11 +14,8 @@ export const funcCart = (id, picture, name, color, size, price, sliced) => {
 		if (names.includes(name)) {
 			// setCart(cartItems.length);
 			toast.info('product already in cart');
-			// alert("product exist in cart")
 			return '';
-			// console.log('True');
 		} else {
-			// console.log('false')
 			cartItems.push({
 				product_id: id,
 				product_picture: picture,
@@ -31,10 +28,8 @@ export const funcCart = (id, picture, name, color, size, price, sliced) => {
 			localStorage.setItem('productsInCart', JSON.stringify(cartItems));
 			localStorage.setItem('Total', parseInt(cartTotal) + parseInt(sliced));
 			toast('product added to cart');
-			// setCart(cartItems.length);
 			return cartItems.length;
 		}
-		//   console.log(data);
 	} else {
 		cartItems = [
 			{

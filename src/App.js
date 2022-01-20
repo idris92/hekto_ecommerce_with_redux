@@ -31,11 +31,15 @@ function App() {
   const [filterName, setFilterName]= useState('');
   const [brandId, setBrandId] = useState([]);
   const [filterId, setFilterId] = useState("");
-  const [searchName, setSearchName] = useState("")
+  const [searchName, setSearchName] = useState("");
+  const [filterPrice, setFilterPrice] = useState({
+    upperbound:"0",
+    lowerbound:'0',
+  });
   const [updatedFavourite, setUpdatedFavourite]= useState({});
   return (
     <div className="App">
-    <userContext.Provider value={{searchName, setSearchName, filterName, setFilterName,pageSize, setPageSize,filterId, setFilterId,brandId, setBrandId, glocalPrice, setglocalPrice,glocalInCart, setglocalInCart,jwt, setJwt, userId, setUserId, payload, setPayload,updatedFavourite, setUpdatedFavourite, cart, setCart, cartTotal, setCartTotal, cartProduct, setCartProduct}}>
+    <userContext.Provider value={{filterPrice, setFilterPrice,searchName, setSearchName, filterName, setFilterName,pageSize, setPageSize,filterId, setFilterId,brandId, setBrandId, glocalPrice, setglocalPrice,glocalInCart, setglocalInCart,jwt, setJwt, userId, setUserId, payload, setPayload,updatedFavourite, setUpdatedFavourite, cart, setCart, cartTotal, setCartTotal, cartProduct, setCartProduct}}>
       
         <BrowserRouter>
         <Nav/>

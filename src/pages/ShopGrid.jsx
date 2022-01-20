@@ -18,11 +18,31 @@ const [currentPage, setCurrentPage]=useState(1);
 const {pageSize, setPageSize}= useContext(userContext);
 const [categories, setCategories]=useState([]);
 const {searchName, setSearchName}= useContext(userContext);
+const {filterPrice, setFilterPrice}= useContext(userContext);
 
 
 // this is use to sent the product and page size to the paginate function
 
 const movies = paginate(products,currentPage,pageSize );
+
+
+//function filter with price
+const handlePrice = ()=>{
+    // if (filterPrice.length !== 0){
+     
+    //     var newArray = products.filter(function (el) {
+    //         return el.Price === filterPrice;
+                  
+    //       });
+    //       setCategories(newArray);
+    //       setProducts(newArray);
+    // }else{
+    //     setProducts(allproducts);
+    // }
+    console.log(filterPrice);
+ 
+}
+
 
 // this is a function that load up all the product from the database onload with the useEffect help
 
@@ -56,7 +76,7 @@ const SearchFilter = ()=>{
     }else{
         setProducts(allproducts);
     }
-    // console.log(filterName);
+   
     
 }
 
@@ -101,7 +121,11 @@ const handleBrand = ()=>{
     useEffect(() => {
         Product()
     }, [])
+// This call the price filter function while price filter changes
 
+useEffect(() => {
+   handlePrice()
+}, [filterPrice])
 //The call teh brand function and this is dependent on the filterId
     useEffect(() => {
         handleCat()

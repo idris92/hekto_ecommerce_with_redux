@@ -90,12 +90,12 @@ export default function Homepage() {
 	}, []);
 	// console.log(top.Color);
 	return (
-		<div style={{ maxWidth: '100%', overflow: 'hidden' }}>
+		<div className="main_container">
 			{/* <Nav
         active ="active"
         /> */}
 			<div className="carousel">
-				<div className="container">
+				<div className="container banner">
 					<div className="row">
 						<div className="col-lg-1">
 							<img src="images/lamp.png" alt="" className="lamp-top" />
@@ -175,10 +175,10 @@ export default function Homepage() {
 				<div className="container">
 					<div className="row">
 						<div className="col-lg-7">
-							<img src={`http://127.0.0.1:8000/images/${unique.Picture_url1}`} alt="" onClick={handleSingle} />
+							<img src={`http://127.0.0.1:8000/images/${unique.Picture_url1}`} alt="" onClick={handleSingle}  />
 						</div>
 
-						<div className="col-lg-5">
+						<div className="col-lg-5" style={{paddingLeft:'8px', paddingRight:'8px'}}>
 							<h1 className="unique-title">Unique Features Of latest & Trending Products</h1>
 							<div className="row">
 								<div className="col-lg-1">
@@ -215,7 +215,7 @@ export default function Homepage() {
 								<div style={{ marginLeft: '18px' }} className="col-lg-8">
 									<p
 										className="subtext-uni"
-										style={{ fontFamily: 'Josefin Sans', fontSize: '14px', color: '#151875' }}
+										style={{ fontFamily: 'Josefin Sans', fontSize: '14px', color: '#151875', fontWeight:"600px" }}
 									>
 										{unique.Name}
 									</p>
@@ -238,7 +238,7 @@ export default function Homepage() {
                     {
                         trending.map((trend)=>(
 
-                            <CardTrending id={trend.id} picture={trend.Picture_url1} price={trend.Price} sliced={Math.ceil(trend.Price - ((trend.SlicedPercentage/100)* trend.Price))}/>
+                            <CardTrending id={trend.id} product_name={trend.Name} picture={trend.Picture_url1} price={trend.Price} sliced={Math.ceil(trend.Price - ((trend.SlicedPercentage/100)* trend.Price))}/>
                         ))
                     }
 					

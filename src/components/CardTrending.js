@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
 
-export default function CardTrending({id,picture, sliced, price}) {
+export default function CardTrending({id,picture, sliced, price, product_name}) {
     const navigate = useNavigate();
     const handleSingle =()=>{
         navigate(`/details/${id}`)
@@ -20,8 +20,8 @@ export default function CardTrending({id,picture, sliced, price}) {
         <div className="card-latest">
            <div className="row">
 
-               <div className="col-lg-12">
-               <p id='text-trend'>Comfort Handy Craft</p>
+               <div className="col-lg-12" style={{paddingLeft:"12px", paddingRight:'12px', overflow:'hidden'}} >
+                        <p id='text-trend' style={{fontSize:'14px', textAlign:'center', whiteSpace:'nowrap'}}>{product_name}</p>
                </div>
                <div className="col-lg-12 trend-price">
                <span id='after-trend'>${sliced}</span>
