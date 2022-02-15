@@ -343,3 +343,60 @@ input:focus{
 .last-row i {
 	margin-right: 1rem;
 }
+
+.categories{
+	cursor: pointer;
+	background-color:transparent;
+	border:none;
+	color: rgba(0,0,0,0.5)
+}
+
+/* login styling */
+
+
+/* login container */
+.top{
+	display:flex;
+	flex: 0.8;
+}
+.container{
+	margin-top: 32px;
+}
+
+.login .container{
+	text-align: center;
+}
+
+.container > h3{
+	font-family: roboto;
+	font-weight: 900;
+	font-size: 32px;
+}
+
+.container > p{
+	color:#9096B2
+}
+
+.container2{
+	width: 30%; 
+	margin: auto
+}
+.container2 .forget{
+	text-align:left; 
+	font-size:14px;
+	font-family: lato;
+	color:#9096B2;
+}
+
+.container2 .account{
+	font-family: lato;
+	font-size: 14px;
+	color: #9096B2;
+	margin-top: 9px
+}
+
+/* @media screen and (max-width: 768px){
+	
+} */
+
+

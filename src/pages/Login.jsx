@@ -49,8 +49,9 @@ function Login() {
             }
          )
         .catch(error =>{
-            alert("Something went wrong! Please check your internet connection....");
-             console.log('error', error)
+            // alert("Something went wrong! Please check your internet connection....");
+            //  console.log('error', error)
+            toast('Email or Password incorrect')
         
         });
 
@@ -73,18 +74,20 @@ function Login() {
 
 
     return (
-        <div>
+        <div className='login'>
             <Banner content="My Account" title="My Account"/>
             {/* <TopFilter/> */}
-            <div className="container" style={{textAlign:'center'}}>
-                <h3 style={{fontFamily:'Roboto', fontWeight:900, fontSize:'32px'}}>Login</h3>
-                <p style={{ color:'#9096B2'}}>Please login using account detail below.</p>
-            <div style={{width: '30%', margin:'auto'}}>
+            <div className='top'>
+            <div className="container">
+                <h3>Login</h3>
+                <p>Please login using account detail below.</p>
+            <div className="container2">
                 <InputBox id='email' value={payload.email} change={handleChange} text="text" location="Email Address" brd="1px solid #C2C5E1" bgcolor="transparent" clr="#000" padding="8px 12px " btnbottom="1px solid #C7CEE4" width="100%" mgn="24px" font="Josefin Sans" radius='2px' />
                 <InputBox id='password' value={payload.password} change={handleChange} text="password" location="Password" brd="1px solid #C2C5E1" bgcolor="transparent" clr="#000" padding="8px 12px " btnbottom="1px solid #C7CEE4" width="100%" mgn="8px" font="Josefin Sans" radius='2px' />
-                <p style={{textAlign:'left', fontSize:'14px',fontFamily:'lato', color:'#9096B2'}}>Forget Your Password</p>
+                <p className='forget'>Forget Your Password</p>
                 <Button click={handleSubmit} border="0" background="#FB2E86" color="#fff" radius="3px" font="Lato" padding="12px 24px" name="Sign In" width='100%' />
-                <p style={{fontFamily:'lato', fontSize:'14px', color:'#9096B2', marginTop:'9px'}}>Don't have an account? <Link to='/register'>Create Account</Link></p>
+                <p className='account'>Don't have an account? <Link to='/register'>Create Account</Link></p>
+            </div>
             </div>
             </div>
         </div>

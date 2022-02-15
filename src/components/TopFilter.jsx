@@ -1,24 +1,34 @@
-import React, {useContext} from 'react'
+
 import {Link} from 'react-router-dom'
-import { userContext } from '../context/UserContext';
+import { useDispatch } from 'react-redux'
+import {searchFilter, pageFilter} from '../redux/action'
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { Product } from '../redux/action';
+import Search from '../functions/Search';
+
 
 function TopFilter() {
-  const {pageSize, setPageSize}= useContext(userContext);
-  const {filterId, setFilterId}= useContext(userContext);
-  const {filterName, setFilterName}= useContext(userContext);
-  const {searchName, setSearchName}= useContext(userContext);
+  const dispatch = useDispatch()
+  const productState = useSelector(state => state.productReducer)
+ 
   const handlePage=(e)=>{
     if (e.target.value === ""){
-      setPageSize(1);
+      dispatch(pageFilter(3))
     }else{
 
-      setPageSize(e.target.value);
+      dispatch(pageFilter(e.target.value))
     }
   }
 
   const handleSearch=(e)=>{
-    setSearchName(e.target.value);
+     
+    Search(e.target.value, productState, searchFilter, dispatch)
+ 
   }
+  useEffect(() => {
+      dispatch(Product)
+  }, [])
     return (
         <div className="container">
         <div className="section-4">
@@ -34,15 +44,15 @@ function TopFilter() {
               <span className="search-text">Per Page:</span>
               <input style={{marginLeft:'8px'}} className="search-input" size={1} type="text"  onChange={handlePage}/>
             </div>
-            <div className="search-div2">
+            {/* <div className="search-div2">
               <span className="search-text">Sort By:</span>
               <select style={{marginLeft:'8px'}} className="search-input" aria-label=".form-select-sm select example">
                 <option selected>Best Match</option>
                 <option value={1}>One</option>
                 <option value={2}>Two</option>
-                <option value={3}>Three</option>
+                <option value={3}>Three</option>21  
               </select>
-            </div>
+            </div> */}
             <div className="search-div3">
               <span className="search-text">View:</span>
               <Link to='/left'><i style={{marginLeft:'8px'}} className="fas fa-list" /></Link>
